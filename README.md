@@ -74,6 +74,20 @@ OPENAI_MODEL
 
 Si mas adelante se quiere automatizar dentro de la web, se puede reactivar una ruta server-side con la API de OpenAI, pero eso tendria facturacion independiente.
 
+## Arquitectura Recomendada Sin Costos API
+
+```text
+Repo GitHub = fuente oficial del producto
+docs/analysis-kit.md = marco de pensamiento
+ChatGPT Project o Custom GPT = asistente de analisis
+RentIQ web app = calculadora y generador de prompts
+```
+
+Documentos clave:
+
+- `docs/analysis-kit.md`
+- `docs/chatgpt-assistant.md`
+
 ## Modelo de calculo
 
 El motor vive en `lib/yield.ts`.
