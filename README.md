@@ -1,6 +1,6 @@
 # RentIQ
 
-RentIQ compara dos escenarios de explotacion para un departamento: renta fija versus Airbnb. El MVP esta construido con Next.js 14, React, TypeScript y Recharts, usando datos simulados de Lima y Cusco para validar la experiencia antes de conectar Supabase, Stripe, Claude y fuentes reales.
+RentIQ compara dos escenarios de explotacion para un departamento: renta fija versus Airbnb. El MVP esta construido con Next.js 14, React, TypeScript y Recharts, usando datos simulados de Lima y Cusco para validar la experiencia antes de conectar Supabase, Stripe y fuentes reales.
 
 ## Funcionalidades incluidas
 
@@ -14,7 +14,7 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - Mapa exploratorio de ventaja Airbnb por zona.
 - Paginas publicas de precios y metodologia.
 - Tests basicos de formulas.
-- Prompt listo para copiar en ChatGPT Plus/Pro sin usar API.
+- ChatGPT Export / Fetch inverso sin usar API de IA.
 
 ## Stack
 
@@ -59,20 +59,22 @@ npm test
 
 Nota: en este entorno de Codex, `npm test` necesito permiso fuera del sandbox porque `tsx/esbuild` inicia un worker.
 
-## Analisis Con ChatGPT Sin API
+## Flujo ChatGPT Export / Fetch Inverso
 
-El boton **Copiar prompt para ChatGPT** en la pantalla de resultado genera un prompt completo con los numeros de la evaluacion.
+RentIQ no usa API de IA. La app genera un paquete estructurado de analisis para que el usuario lo lleve manualmente a ChatGPT Plus/Pro.
 
-Esta opcion evita costos de API: el usuario pega el prompt manualmente en ChatGPT y usa su suscripcion existente.
+Modos disponibles:
 
-No se requiere:
+- **Modo privado:** boton **Copiar prompt para ChatGPT**. Copia Markdown completo al portapapeles. Recomendado para datos sensibles.
+- **Modo rapido:** boton **Copiar link fetch para ChatGPT**. Copia un link `/api/chatgpt-export?p=...` que devuelve Markdown legible. No usa almacenamiento persistente.
 
-```text
-OPENAI_API_KEY
-OPENAI_MODEL
-```
+Privacidad:
 
-Si mas adelante se quiere automatizar dentro de la web, se puede reactivar una ruta server-side con la API de OpenAI, pero eso tendria facturacion independiente.
+- La direccion exacta no se comparte por defecto.
+- El link codifica datos en la URL; para datos sensibles usar el prompt directo.
+- No configurar claves de API de IA.
+- No instalar SDKs de OpenAI, Anthropic ni similares.
+- No hay costo de tokens API.
 
 ## Arquitectura Recomendada Sin Costos API
 
@@ -120,7 +122,6 @@ neto_airbnb(ocupacion) = neto_renta_fija
 - PostGIS/H3 para metricas geograficas.
 - API `/api/yield-runs`.
 - Stripe para reporte unico y planes Pro/Agente.
-- Claude API para narrativa generada.
 - PDF premium.
 - n8n para ingesta y alertas mensuales.
 

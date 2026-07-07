@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Clipboard, Download, RotateCcw, Share2 } from "lucide-react";
+import { Download, RotateCcw, Share2 } from "lucide-react";
+import { ChatGPTExportPanel } from "@/components/chatgpt-export-panel";
 import { ScenarioCard } from "@/components/ScenarioCard";
 import { SeasonalityChart } from "@/components/SeasonalityChart";
 import { assumptionsForDistrict, zones } from "@/lib/market-data";
@@ -19,9 +20,8 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
   const zone = zones.find((item) => item.district === district) || zones[0];
   const baseAssumptions = useMemo(() => assumptionsForDistrict(zone.district), [zone.district]);
   const [assumptions, setAssumptions] = useState<MarketAssumptions>(baseAssumptions);
-  const [copiedPrompt, setCopiedPrompt] = useState(false);
 
-  const unit: UnitInput = {
+  const unit: UnitInput & { city: string } = {
     ...defaultUnit,
     district: zone.district,
     address: String(searchParams.address || `${zone.district}, ${zone.city}`),
@@ -31,7 +31,8 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
     propertyValue: numberParam(searchParams, "propertyValue", 510000),
     maintenance: numberParam(searchParams, "maintenance", 380),
     furnished: String(searchParams.furnished || "true") === "true",
-    currentRent: numberParam(searchParams, "currentRent", 0) || undefined
+    currentRent: numberParam(searchParams, "currentRent", 0) || undefined,
+    city: zone.city
   };
 
   const result = compareYield(unit, assumptions);
@@ -41,39 +42,6 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
 
   function updateAssumption(key: keyof MarketAssumptions, value: number) {
     setAssumptions((current) => ({ ...current, [key]: value }));
-  }
-
-  const chatGptPrompt = `Actua como analista inmobiliario para RentIQ. Analiza esta evaluacion y dame:
-1. Veredicto claro.
-2. Riesgos principales.
-3. Condiciones bajo las cuales cambiaria la decision.
-4. Tres recomendaciones accionables.
-
-No prometas rentabilidades y aclara que no es asesoria financiera, legal ni tributaria.
-
-Datos:
-- Direccion: ${unit.address}
-- Distrito: ${zone.district}, ${zone.city}
-- Unidad: ${unit.bedrooms === 0 ? "Studio" : `${unit.bedrooms} dormitorios`}, ${unit.areaM2} m2, ${unit.furnished ? "amoblado" : "sin amoblar"}
-- Valor del inmueble: ${money(unit.propertyValue)}
-- Mantenimiento mensual: ${money(unit.maintenance)}
-- Ganador base: ${winnerLabel}
-- Neto renta fija: ${money(result.fixed.netMonthly)}
-- Neto Airbnb: ${money(result.airbnb.netMonthly)}
-- Diferencia mensual: ${money(Math.abs(result.monthlyDelta))}
-- Break-even ocupacion Airbnb: ${pct(result.breakevenOccupancy)}
-- Ocupacion estimada zona: ${pct(assumptions.occupancy)}
-- ADR Airbnb supuesto: ${money(assumptions.adr)}
-- Renta fija supuesta: ${money(assumptions.fixedRent)}
-- Gestion Airbnb: ${pct(assumptions.airbnbManagementPct)}
-- Comision plataforma: ${pct(assumptions.platformPct)}
-- Impuesto supuesto: ${pct(assumptions.taxPct)}
-- Nota zona: ${zone.note}`;
-
-  async function copyPromptForChatGpt() {
-    await navigator.clipboard.writeText(chatGptPrompt);
-    setCopiedPrompt(true);
-    window.setTimeout(() => setCopiedPrompt(false), 2200);
   }
 
   return (
@@ -160,22 +128,21 @@ Datos:
           </button>
         </section>
 
-        <section className="card">
-          <span className="eyebrow">Narrativa IA</span>
-          <h2>Analisis con tu ChatGPT</h2>
-          <p className="muted">
-            En {zone.district}, Airbnb gana cuando sostienes ocupacion por encima de {pct(result.breakevenOccupancy)} y
-            controlas gestion, limpieza y servicios. La renta fija se vuelve mas atractiva si priorizas estabilidad,
-            menos horas operativas y menor exposicion al reglamento del edificio.
-          </p>
-          <button className="button primary" onClick={copyPromptForChatGpt} type="button">
-            <Clipboard size={18} /> {copiedPrompt ? "Prompt copiado" : "Copiar prompt para ChatGPT"}
-          </button>
-          <div className="ai-box">
-            <span className="badge neutral">Sin costo API</span>
-            <p>{chatGptPrompt}</p>
-          </div>
-        </section>
+        <ChatGPTExportPanel
+          assumptions={assumptions}
+          confidence="media - 24-31 comparables demo"
+          regulatoryRisk={{
+            semaforo: zone.regulation,
+            checklist: "Reglamento interno, junta de propietarios, reglas de huespedes, zonificacion y subarriendo."
+          }}
+          result={result}
+          sensitivity={{
+            renta_fija_menos_10: Math.round(assumptions.fixedRent * 0.9),
+            renta_fija_mas_10: Math.round(assumptions.fixedRent * 1.1)
+          }}
+          unit={unit}
+          zoneNote={zone.note}
+        />
       </div>
 
       <aside className="rail grid">

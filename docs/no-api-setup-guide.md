@@ -1,6 +1,6 @@
 # RentIQ No-API Setup Guide
 
-Esta guia explica como usar RentIQ con ChatGPT Plus/Pro sin API, sin `OPENAI_API_KEY` y sin costos adicionales por tokens.
+Esta guia explica como usar RentIQ con ChatGPT Plus/Pro sin API de IA, sin claves de proveedor y sin costos adicionales por tokens API.
 
 ## Arquitectura Final Recomendada
 
@@ -132,14 +132,7 @@ Output Directory: default / vacio
 Root Directory: default / vacio
 ```
 
-4. No agregues estas variables:
-
-```text
-OPENAI_API_KEY
-OPENAI_MODEL
-```
-
-No hacen falta porque no usaremos API.
+4. No agregues variables de entorno de proveedores de IA. No hacen falta porque no usaremos API.
 
 5. Haz deploy.
 
@@ -232,12 +225,10 @@ Para el MVP, el Project es suficiente.
 
 No hacer:
 
-```text
-No crear OPENAI_API_KEY en Vercel
-No agregar endpoints /api/openai o /api/analizar
-No instalar SDK de OpenAI para produccion
-No automatizar analisis dentro de la web todavia
-```
+- No crear claves de API de IA en Vercel.
+- No agregar endpoints que llamen a proveedores de IA.
+- No instalar SDKs de OpenAI, Anthropic ni similares para produccion.
+- No automatizar analisis dentro de la web todavia.
 
 Si algun dia se activa API, hacerlo solo con:
 
@@ -253,8 +244,9 @@ Antes de lanzar:
 
 ```text
 [ ] App publicada en Vercel
-[ ] No hay OPENAI_API_KEY en Vercel
+[ ] No hay claves de API de IA en Vercel
 [ ] Boton "Copiar prompt para ChatGPT" funciona
+[ ] Boton "Copiar link fetch para ChatGPT" funciona
 [ ] Project "RentIQ Analyst" creado
 [ ] README.md subido al Project
 [ ] docs/analysis-kit.md subido al Project
@@ -263,4 +255,3 @@ Antes de lanzar:
 [ ] PRD subido como contexto opcional
 [ ] Primer prompt de prueba analizado en ChatGPT
 ```
-
