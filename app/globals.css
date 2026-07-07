@@ -424,6 +424,15 @@ select {
   border: 1px solid var(--line);
 }
 
+.ai-box {
+  background: #fafafa;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  white-space: pre-wrap;
+}
+
 @media (max-width: 920px) {
   .hero,
   .result-layout,

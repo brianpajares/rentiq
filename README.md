@@ -14,6 +14,7 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - Mapa exploratorio de ventaja Airbnb por zona.
 - Paginas publicas de precios y metodologia.
 - Tests basicos de formulas.
+- Endpoint `POST /api/analizar` para generar analisis IA con OpenAI.
 
 ## Stack
 
@@ -57,6 +58,23 @@ npm test
 ```
 
 Nota: en este entorno de Codex, `npm test` necesito permiso fuera del sandbox porque `tsx/esbuild` inicia un worker.
+
+## OpenAI / Analisis IA
+
+El boton **Analizar con IA** en la pantalla de resultado llama a:
+
+```text
+POST /api/analizar
+```
+
+Variables necesarias en Vercel:
+
+```text
+OPENAI_API_KEY=tu_api_key
+OPENAI_MODEL=gpt-5.5
+```
+
+`OPENAI_MODEL` es configurable. Si tu cuenta de OpenAI usa otro identificador de modelo, cambialo en Vercel sin tocar codigo.
 
 ## Modelo de calculo
 

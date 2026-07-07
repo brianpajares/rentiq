@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Download, RotateCcw, Share2 } from "lucide-react";
+import { Download, RotateCcw, Share2, Sparkles } from "lucide-react";
 import { ScenarioCard } from "@/components/ScenarioCard";
 import { SeasonalityChart } from "@/components/SeasonalityChart";
 import { assumptionsForDistrict, zones } from "@/lib/market-data";
@@ -19,6 +19,8 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
   const zone = zones.find((item) => item.district === district) || zones[0];
   const baseAssumptions = useMemo(() => assumptionsForDistrict(zone.district), [zone.district]);
   const [assumptions, setAssumptions] = useState<MarketAssumptions>(baseAssumptions);
+  const [aiAnalysis, setAiAnalysis] = useState("");
+  const [aiStatus, setAiStatus] = useState<"idle" | "loading" | "error">("idle");
 
   const unit: UnitInput = {
     ...defaultUnit,
@@ -40,6 +42,35 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
 
   function updateAssumption(key: keyof MarketAssumptions, value: number) {
     setAssumptions((current) => ({ ...current, [key]: value }));
+  }
+
+  async function analyzeWithAi() {
+    setAiStatus("loading");
+    setAiAnalysis("");
+
+    const response = await fetch("/api/analizar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        address: unit.address,
+        district: zone.district,
+        winner: winnerLabel,
+        fixedNet: result.fixed.netMonthly,
+        airbnbNet: result.airbnb.netMonthly,
+        breakeven: result.breakevenOccupancy,
+        occupancy: assumptions.occupancy
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      setAiStatus("error");
+      setAiAnalysis(data.error || "No se pudo generar el analisis IA.");
+      return;
+    }
+
+    setAiStatus("idle");
+    setAiAnalysis(data.text);
   }
 
   return (
@@ -134,6 +165,17 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
             controlas gestion, limpieza y servicios. La renta fija se vuelve mas atractiva si priorizas estabilidad,
             menos horas operativas y menor exposicion al reglamento del edificio.
           </p>
+          <button className="button primary" disabled={aiStatus === "loading"} onClick={analyzeWithAi} type="button">
+            <Sparkles size={18} /> {aiStatus === "loading" ? "Analizando..." : "Analizar con IA"}
+          </button>
+          {aiAnalysis ? (
+            <div className="ai-box">
+              <span className={`badge ${aiStatus === "error" ? "neutral" : "airbnb"}`}>
+                {aiStatus === "error" ? "Config pendiente" : "Analisis OpenAI"}
+              </span>
+              <p>{aiAnalysis}</p>
+            </div>
+          ) : null}
         </section>
       </div>
 
