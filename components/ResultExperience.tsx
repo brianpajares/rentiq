@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Download, RotateCcw, Share2, Sparkles } from "lucide-react";
+import { Clipboard, Download, RotateCcw, Share2 } from "lucide-react";
 import { ScenarioCard } from "@/components/ScenarioCard";
 import { SeasonalityChart } from "@/components/SeasonalityChart";
 import { assumptionsForDistrict, zones } from "@/lib/market-data";
@@ -19,8 +19,7 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
   const zone = zones.find((item) => item.district === district) || zones[0];
   const baseAssumptions = useMemo(() => assumptionsForDistrict(zone.district), [zone.district]);
   const [assumptions, setAssumptions] = useState<MarketAssumptions>(baseAssumptions);
-  const [aiAnalysis, setAiAnalysis] = useState("");
-  const [aiStatus, setAiStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [copiedPrompt, setCopiedPrompt] = useState(false);
 
   const unit: UnitInput = {
     ...defaultUnit,
@@ -44,33 +43,37 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
     setAssumptions((current) => ({ ...current, [key]: value }));
   }
 
-  async function analyzeWithAi() {
-    setAiStatus("loading");
-    setAiAnalysis("");
+  const chatGptPrompt = `Actua como analista inmobiliario para RentIQ. Analiza esta evaluacion y dame:
+1. Veredicto claro.
+2. Riesgos principales.
+3. Condiciones bajo las cuales cambiaria la decision.
+4. Tres recomendaciones accionables.
 
-    const response = await fetch("/api/analizar", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        address: unit.address,
-        district: zone.district,
-        winner: winnerLabel,
-        fixedNet: result.fixed.netMonthly,
-        airbnbNet: result.airbnb.netMonthly,
-        breakeven: result.breakevenOccupancy,
-        occupancy: assumptions.occupancy
-      })
-    });
+No prometas rentabilidades y aclara que no es asesoria financiera, legal ni tributaria.
 
-    const data = await response.json();
-    if (!response.ok) {
-      setAiStatus("error");
-      setAiAnalysis(data.error || "No se pudo generar el analisis IA.");
-      return;
-    }
+Datos:
+- Direccion: ${unit.address}
+- Distrito: ${zone.district}, ${zone.city}
+- Unidad: ${unit.bedrooms === 0 ? "Studio" : `${unit.bedrooms} dormitorios`}, ${unit.areaM2} m2, ${unit.furnished ? "amoblado" : "sin amoblar"}
+- Valor del inmueble: ${money(unit.propertyValue)}
+- Mantenimiento mensual: ${money(unit.maintenance)}
+- Ganador base: ${winnerLabel}
+- Neto renta fija: ${money(result.fixed.netMonthly)}
+- Neto Airbnb: ${money(result.airbnb.netMonthly)}
+- Diferencia mensual: ${money(Math.abs(result.monthlyDelta))}
+- Break-even ocupacion Airbnb: ${pct(result.breakevenOccupancy)}
+- Ocupacion estimada zona: ${pct(assumptions.occupancy)}
+- ADR Airbnb supuesto: ${money(assumptions.adr)}
+- Renta fija supuesta: ${money(assumptions.fixedRent)}
+- Gestion Airbnb: ${pct(assumptions.airbnbManagementPct)}
+- Comision plataforma: ${pct(assumptions.platformPct)}
+- Impuesto supuesto: ${pct(assumptions.taxPct)}
+- Nota zona: ${zone.note}`;
 
-    setAiStatus("idle");
-    setAiAnalysis(data.text);
+  async function copyPromptForChatGpt() {
+    await navigator.clipboard.writeText(chatGptPrompt);
+    setCopiedPrompt(true);
+    window.setTimeout(() => setCopiedPrompt(false), 2200);
   }
 
   return (
@@ -159,23 +162,19 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
 
         <section className="card">
           <span className="eyebrow">Narrativa IA</span>
-          <h2>Veredicto explicado</h2>
+          <h2>Analisis con tu ChatGPT</h2>
           <p className="muted">
             En {zone.district}, Airbnb gana cuando sostienes ocupacion por encima de {pct(result.breakevenOccupancy)} y
             controlas gestion, limpieza y servicios. La renta fija se vuelve mas atractiva si priorizas estabilidad,
             menos horas operativas y menor exposicion al reglamento del edificio.
           </p>
-          <button className="button primary" disabled={aiStatus === "loading"} onClick={analyzeWithAi} type="button">
-            <Sparkles size={18} /> {aiStatus === "loading" ? "Analizando..." : "Analizar con IA"}
+          <button className="button primary" onClick={copyPromptForChatGpt} type="button">
+            <Clipboard size={18} /> {copiedPrompt ? "Prompt copiado" : "Copiar prompt para ChatGPT"}
           </button>
-          {aiAnalysis ? (
-            <div className="ai-box">
-              <span className={`badge ${aiStatus === "error" ? "neutral" : "airbnb"}`}>
-                {aiStatus === "error" ? "Config pendiente" : "Analisis OpenAI"}
-              </span>
-              <p>{aiAnalysis}</p>
-            </div>
-          ) : null}
+          <div className="ai-box">
+            <span className="badge neutral">Sin costo API</span>
+            <p>{chatGptPrompt}</p>
+          </div>
         </section>
       </div>
 
