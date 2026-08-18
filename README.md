@@ -1,6 +1,6 @@
 # RentIQ
 
-RentIQ compara dos escenarios de explotacion para un departamento: renta fija versus Airbnb. El MVP esta construido con Next.js 14, React, TypeScript y Recharts, usando datos simulados de Lima y Cusco para validar la experiencia antes de conectar Supabase, Stripe y fuentes reales.
+RentIQ compara dos escenarios de explotacion para un departamento: renta fija versus Airbnb. El MVP esta construido con Next.js 14, React, TypeScript y Recharts, usando datasets versionados de Lima y Cusco para validar la experiencia antes de conectar fuentes reales.
 
 ## Funcionalidades incluidas
 
@@ -15,6 +15,7 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - Paginas publicas de precios y metodologia.
 - Tests basicos de formulas.
 - ChatGPT Export / Fetch inverso sin usar API de IA.
+- Datasets operativos en `datasets/` con copias editables en Google Drive.
 
 ## Stack
 
@@ -26,6 +27,28 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - Zod preparado como dependencia para validaciones
 - MapLibre GL instalado para la fase de mapa real
 
+## Datasets Operativos
+
+La app lee datasets versionados desde:
+
+```text
+datasets/
+```
+
+Tambien se creo una carpeta en Google Drive llamada:
+
+```text
+RentIQ Datasets
+```
+
+Esa carpeta contiene copias editables para actualizacion mensual o bajo demanda. En produccion, Vercel usa los datasets del repo para no depender de permisos privados de Drive ni variables de entorno.
+
+Documentacion:
+
+```text
+docs/datasets.md
+```
+
 ## Rutas principales
 
 - `/` landing
@@ -34,7 +57,7 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - `/app/unidad/demo` resultado comparativo
 - `/app/mapa` explorador de mercado
 - `/precios` planes
-- `/metodologia` formulas y disclaimers
+- `/metodologia` formulas, datasets y disclaimers
 
 ## Ejecutar localmente
 
@@ -57,8 +80,6 @@ npm run lint
 npm test
 ```
 
-Nota: en este entorno de Codex, `npm test` necesito permiso fuera del sandbox porque `tsx/esbuild` inicia un worker.
-
 ## Flujo ChatGPT Export / Fetch Inverso
 
 RentIQ no usa API de IA. La app genera un paquete estructurado de analisis para que el usuario lo lleve manualmente a ChatGPT Plus/Pro.
@@ -80,15 +101,18 @@ Privacidad:
 
 ```text
 Repo GitHub = fuente oficial del producto
-docs/analysis-kit.md = marco de pensamiento
-ChatGPT Project o Custom GPT = asistente de analisis
-RentIQ web app = calculadora y generador de prompts
+Google Drive = fuente editable de datasets mensuales
+Vercel = hosting publico de la app
+RentIQ web app = calculadora + generador de prompts/link fetch
+ChatGPT Project o Custom GPT = asistente de analisis manual
 ```
 
 Documentos clave:
 
 - `docs/analysis-kit.md`
 - `docs/chatgpt-assistant.md`
+- `docs/no-api-setup-guide.md`
+- `docs/datasets.md`
 
 ## Modelo de calculo
 
@@ -122,6 +146,7 @@ neto_airbnb(ocupacion) = neto_renta_fija
 - PostGIS/H3 para metricas geograficas.
 - API `/api/yield-runs`.
 - Stripe para reporte unico y planes Pro/Agente.
+- Fuentes reales de mercado con actualizacion mensual.
 - PDF premium.
 - n8n para ingesta y alertas mensuales.
 
