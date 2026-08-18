@@ -1,0 +1,38 @@
+[
+  {
+    "city": "Lima",
+    "district": "Miraflores",
+    "level": "yellow",
+    "summary": "Revisar reglamento interno, reglas de seguridad y autorizacion de alquiler temporal."
+  },
+  {
+    "city": "Lima",
+    "district": "Barranco",
+    "level": "yellow",
+    "summary": "Zona turistica atractiva con sensibilidad a reglas de edificio y convivencia."
+  },
+  {
+    "city": "Lima",
+    "district": "San Isidro",
+    "level": "green",
+    "summary": "Menor friccion municipal esperada; validar restricciones del edificio."
+  },
+  {
+    "city": "Lima",
+    "district": "Surco",
+    "level": "green",
+    "summary": "Perfil residencial; validar junta de propietarios antes de operar temporal."
+  },
+  {
+    "city": "Lima",
+    "district": "Magdalena",
+    "level": "green",
+    "summary": "Riesgo operativo manejable con reglas claras del edificio."
+  },
+  {
+    "city": "Cusco",
+    "district": "Centro Historico",
+    "level": "yellow",
+    "summary": "Alta sensibilidad turistica; validar licencias, edificio y zonas protegidas."
+  }
+]
