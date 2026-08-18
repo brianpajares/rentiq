@@ -1,0 +1,14 @@
+[
+  { "month": "Ene", "occupancy": 0.61, "adr": 224, "period": "2026" },
+  { "month": "Feb", "occupancy": 0.58, "adr": 218, "period": "2026" },
+  { "month": "Mar", "occupancy": 0.56, "adr": 214, "period": "2026" },
+  { "month": "Abr", "occupancy": 0.6, "adr": 228, "period": "2026" },
+  { "month": "May", "occupancy": 0.63, "adr": 232, "period": "2026" },
+  { "month": "Jun", "occupancy": 0.67, "adr": 246, "period": "2026" },
+  { "month": "Jul", "occupancy": 0.72, "adr": 260, "period": "2026" },
+  { "month": "Ago", "occupancy": 0.69, "adr": 252, "period": "2026" },
+  { "month": "Sep", "occupancy": 0.62, "adr": 235, "period": "2026" },
+  { "month": "Oct", "occupancy": 0.65, "adr": 242, "period": "2026" },
+  { "month": "Nov", "occupancy": 0.66, "adr": 248, "period": "2026" },
+  { "month": "Dic", "occupancy": 0.71, "adr": 265, "period": "2026" }
+]
