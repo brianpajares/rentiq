@@ -1,0 +1,17 @@
+{
+  "id": "rentiq-operating-assumptions-2026-07",
+  "period": "2026-07",
+  "calculationModelVersion": "mvp-demo",
+  "defaults": {
+    "fixedManagementPct": 0,
+    "airbnbManagementPct": 0.22,
+    "platformPct": 0.15,
+    "taxPct": 0.05,
+    "avgStayNights": 3.2,
+    "cleaningFee": 60,
+    "monthlyServices": 280,
+    "supplies": 120
+  },
+  "refreshCadence": "monthly-or-on-demand",
+  "owner": "Zone Digital"
+}
