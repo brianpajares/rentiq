@@ -13,6 +13,7 @@ export function Topbar() {
       <nav className="nav">
         <Link href="/app/nueva">Nueva evaluacion</Link>
         <Link href="/app/mapa">Mapa</Link>
+        <Link href="/precios">Precios</Link>
         <Link href="/metodologia">Metodologia</Link>
         <Link className="button primary" href="/app/nueva">
           Comparar

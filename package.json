@@ -2,12 +2,13 @@
   "name": "rentiq",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx tests/yield.check.ts"
+    "test": "node tests/yield.check.ts"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

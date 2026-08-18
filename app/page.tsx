@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Building2, FileText, Map, ShieldCheck } from "lucide-react";
+import { ArrowRight, Building2, CircleDollarSign, FileText, Map, ShieldCheck } from "lucide-react";
 import { Topbar } from "@/components/Topbar";
 import { assumptionsForDistrict, zones } from "@/lib/market-data";
 import { compareYield, defaultUnit, money, pct } from "@/lib/yield";
@@ -33,6 +33,9 @@ export default function HomePage() {
             </Link>
             <Link className="button secondary" href="/app/mapa">
               Ver mapa <Map size={18} />
+            </Link>
+            <Link className="button secondary" href="/precios">
+              Ver precios <CircleDollarSign size={18} />
             </Link>
           </div>
         </div>
@@ -71,6 +74,19 @@ export default function HomePage() {
             </article>
           ))}
         </div>
+      </section>
+      <section className="page monetization-strip">
+        <div>
+          <span className="eyebrow">Listo para vender</span>
+          <h2>De comparador gratis a reporte pagado</h2>
+          <p className="muted">
+            El flujo gratuito entrega una respuesta rapida. El upsell natural es el reporte completo con sensibilidad,
+            riesgos y narrativa para propietarios, inversionistas o agentes.
+          </p>
+        </div>
+        <Link className="button primary" href="/precios">
+          Monetizar con RentIQ <ArrowRight size={18} />
+        </Link>
       </section>
     </main>
   );

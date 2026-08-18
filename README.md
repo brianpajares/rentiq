@@ -16,6 +16,9 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - Tests basicos de formulas.
 - ChatGPT Export / Fetch inverso sin usar API de IA.
 - Datasets operativos en `datasets/` con copias editables en Google Drive.
+- Capa comercial con planes Free, Reporte, Pro y Agentes.
+- CTAs de monetizacion listos para Stripe Payment Links o contacto comercial.
+- Paginas basicas de contacto, terminos, privacidad, robots y sitemap.
 
 ## Stack
 
@@ -78,6 +81,35 @@ http://localhost:3000
 npm run build
 npm run lint
 npm test
+```
+
+Nota: en este entorno de Codex, `npm test` necesito permiso fuera del sandbox porque `tsx/esbuild` inicia un worker.
+
+## Monetizacion
+
+La app esta preparada para vender:
+
+- Reporte por unidad: producto inicial recomendado.
+- Pro mensual: para inversionistas que evaluan varias unidades.
+- Agentes: plan comercial para corredores y brokers.
+
+Configurar variables opcionales:
+
+```text
+NEXT_PUBLIC_SITE_URL
+NEXT_PUBLIC_SALES_EMAIL
+NEXT_PUBLIC_SALES_CONTACT_URL
+NEXT_PUBLIC_STRIPE_REPORT_LINK
+NEXT_PUBLIC_STRIPE_PRO_LINK
+NEXT_PUBLIC_STRIPE_AGENCY_LINK
+```
+
+Si los links de Stripe estan vacios, los botones pagados llevan a `/contacto`.
+
+Playbook:
+
+```text
+docs/monetization.md
 ```
 
 ## Flujo ChatGPT Export / Fetch Inverso

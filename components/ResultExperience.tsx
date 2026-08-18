@@ -5,6 +5,7 @@ import { Download, RotateCcw, Share2 } from "lucide-react";
 import { ChatGPTExportPanel } from "@/components/chatgpt-export-panel";
 import { ScenarioCard } from "@/components/ScenarioCard";
 import { SeasonalityChart } from "@/components/SeasonalityChart";
+import { checkoutHref, monetizationPlans, paidFeatureGates } from "@/lib/commerce";
 import { assumptionsForDistrict, zones } from "@/lib/market-data";
 import { MarketAssumptions, UnitInput, compareYield, defaultUnit, money, pct } from "@/lib/yield";
 
@@ -44,6 +45,8 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
     setAssumptions((current) => ({ ...current, [key]: value }));
   }
 
+  const reportPlan = monetizationPlans.find((plan) => plan.id === "report") || monetizationPlans[1];
+
   return (
     <div className="result-layout">
       <div className="grid">
@@ -62,12 +65,12 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
             <strong>{pct(result.breakevenOccupancy)}</strong> de ocupacion.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <button className="button secondary" type="button">
-              <Download size={18} /> PDF
-            </button>
-            <button className="button secondary" type="button">
-              <Share2 size={18} /> Compartir
-            </button>
+            <a className="button primary" href={checkoutHref(reportPlan)}>
+              <Download size={18} /> Comprar reporte
+            </a>
+            <a className="button secondary" href="/precios">
+              <Share2 size={18} /> Ver planes
+            </a>
           </div>
         </section>
 
@@ -128,6 +131,33 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
           </button>
         </section>
 
+        <section className="card">
+          <span className="eyebrow">Narrativa base</span>
+          <h2>Lectura ejecutiva</h2>
+          <p className="muted">
+            En {zone.district}, Airbnb gana cuando sostienes ocupacion por encima de {pct(result.breakevenOccupancy)} y
+            controlas gestion, limpieza y servicios. La renta fija se vuelve mas atractiva si priorizas estabilidad,
+            menos horas operativas y menor exposicion al reglamento del edificio.
+          </p>
+        </section>
+
+        <section className="card">
+          <span className="eyebrow">Desbloqueo premium</span>
+          <h2>Convierte esta evaluacion en un activo vendible</h2>
+          <div className="grid three">
+            {paidFeatureGates.map((feature) => (
+              <article className="unlock-card" key={feature.title}>
+                <span className="badge neutral">{feature.plan}</span>
+                <h3>{feature.title}</h3>
+                <p className="muted">{feature.description}</p>
+              </article>
+            ))}
+          </div>
+          <a className="button primary" href={checkoutHref(reportPlan)} style={{ marginTop: 16 }}>
+            Comprar analisis premium
+          </a>
+        </section>
+
         <ChatGPTExportPanel
           assumptions={assumptions}
           confidence="media - 24-31 comparables demo"
@@ -161,6 +191,10 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
           <div className="cost-row">
             <span>Ventaja Airbnb</span>
             <strong>{pct(zone.airbnbAdvantage)}</strong>
+          </div>
+          <div className="cost-row">
+            <span>Dataset</span>
+            <strong>{zone.period}</strong>
           </div>
         </section>
         <section className="card">
