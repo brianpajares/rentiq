@@ -38,6 +38,10 @@ export default function MarketMapPage() {
                     {zone.listings} / {zone.rentals}
                   </strong>
                 </div>
+                <div className="cost-row">
+                  <span>Dataset</span>
+                  <strong>{zone.period}</strong>
+                </div>
                 <Link className="button secondary" href={`/app/unidad/demo?district=${zone.district}`}>
                   Evaluar aqui <ArrowRight size={16} />
                 </Link>
