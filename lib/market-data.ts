@@ -39,7 +39,7 @@ export const datasetCatalog = {
     {
       id: "seasonality",
       file: "datasets/seasonality.json",
-      description: "Curva mensual demo de ocupacion y ADR usada en el grafico de estacionalidad."
+      description: "Curva mensual curada de ocupacion y ADR usada en el grafico de estacionalidad."
     },
     {
       id: "operating-assumptions",

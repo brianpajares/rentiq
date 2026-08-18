@@ -16,7 +16,7 @@ export default function NewRunPage() {
       params.set(key, String(value));
     }
     params.set("bedrooms", String(bedrooms));
-    router.push(`/app/unidad/demo?${params.toString()}`);
+    router.push(`/app/unidad/resultado?${params.toString()}`);
   }
 
   return (

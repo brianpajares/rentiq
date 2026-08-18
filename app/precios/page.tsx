@@ -6,7 +6,7 @@ import { checkoutHref, monetizationPlans, salesContactUrl } from "@/lib/commerce
 
 export const metadata: Metadata = {
   title: "Precios | RentIQ",
-  description: "Planes de RentIQ para comparar Airbnb vs renta fija, comprar reportes y activar seguimiento mensual."
+  description: "Planes de RentIQ para comparar Airbnb vs renta fija con datasets curados, comprar reportes y activar seguimiento mensual."
 };
 
 export default function PricingPage() {
@@ -18,7 +18,7 @@ export default function PricingPage() {
         <h1 className="section-title">Monetizacion lista para reportes, Pro y agentes</h1>
         <p className="muted lead">
           RentIQ vende una decision: si una unidad debe quedarse en renta fija, migrar a Airbnb o descartarse. La
-          prueba gratis captura interes; los planes pagados desbloquean profundidad, seguimiento y uso comercial.
+          evaluacion inicial captura interes; los planes pagados desbloquean profundidad, seguimiento y uso comercial.
         </p>
 
         <div className="grid four pricing-grid">
@@ -93,7 +93,7 @@ export default function PricingPage() {
           {[
             ["Que se cobra primero?", "El reporte por unidad. Es facil de entender, tiene urgencia y no exige login."],
             ["Cuando activar suscripcion?", "Cuando el usuario evalua varias unidades o necesita actualizaciones mensuales."],
-            ["Hace falta API de IA?", "No para esta version. El analisis premium se apoya en el paquete exportable para ChatGPT."],
+            ["De donde sale la data?", "De datasets curados en Drive, versionados en GitHub y desplegados en produccion."],
             ["Que falta para cobro 100% automatico?", "Crear Payment Links en Stripe y pegarlos como variables de entorno en Vercel."]
           ].map(([question, answer]) => (
             <article className="card compact-card" key={question}>

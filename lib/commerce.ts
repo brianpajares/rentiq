@@ -30,10 +30,10 @@ export const monetizationPlans: MonetizationPlan[] = [
     name: "Free",
     audience: "Propietarios curiosos",
     price: "S/ 0",
-    billing: "demo publica",
-    description: "Compara una unidad con supuestos demo y decide si vale la pena profundizar.",
+    billing: "evaluacion inicial",
+    description: "Compara una unidad con datasets curados y decide si vale la pena profundizar.",
     cta: "Probar gratis",
-    features: ["Comparador Airbnb vs renta fija", "Mapa demo por distrito", "Prompt manual para ChatGPT"],
+    features: ["Comparador Airbnb vs renta fija", "Mapa por distrito", "Supuestos trazables por periodo"],
     limits: ["Sin PDF descargable", "Sin portafolio", "Sin alertas mensuales"]
   },
   {
@@ -68,7 +68,7 @@ export const monetizationPlans: MonetizationPlan[] = [
     price: "Desde S/ 349",
     billing: "mensual",
     description: "Herramienta comercial para captar propietarios y sustentar recomendaciones con numeros.",
-    cta: "Solicitar demo",
+    cta: "Solicitar evaluacion",
     checkoutEnv: "NEXT_PUBLIC_STRIPE_AGENCY_LINK",
     features: ["Reportes con narrativa comercial", "Uso en captacion de propiedades", "Priorizacion de zonas", "Onboarding guiado del equipo"],
     limits: ["Requiere validacion de marca y proceso comercial", "Integraciones CRM bajo alcance"]
@@ -88,7 +88,7 @@ export const paidFeatureGates = [
   },
   {
     title: "Alertas mensuales",
-    description: "Actualiza supuestos de ADR, ocupacion, renta fija y riesgo cuando se refrescan datasets.",
+    description: "Actualiza supuestos de ADR, ocupacion, renta fija y riesgo cuando se refrescan los datasets de Drive.",
     plan: "Pro"
   }
 ];

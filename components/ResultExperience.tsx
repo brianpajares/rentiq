@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { Download, RotateCcw, Share2 } from "lucide-react";
-import { ChatGPTExportPanel } from "@/components/chatgpt-export-panel";
 import { ScenarioCard } from "@/components/ScenarioCard";
 import { SeasonalityChart } from "@/components/SeasonalityChart";
 import { checkoutHref, monetizationPlans, paidFeatureGates } from "@/lib/commerce";
@@ -158,21 +157,6 @@ export function ResultExperience({ searchParams }: { searchParams: Record<string
           </a>
         </section>
 
-        <ChatGPTExportPanel
-          assumptions={assumptions}
-          confidence="media - 24-31 comparables demo"
-          regulatoryRisk={{
-            semaforo: zone.regulation,
-            checklist: "Reglamento interno, junta de propietarios, reglas de huespedes, zonificacion y subarriendo."
-          }}
-          result={result}
-          sensitivity={{
-            renta_fija_menos_10: Math.round(assumptions.fixedRent * 0.9),
-            renta_fija_mas_10: Math.round(assumptions.fixedRent * 1.1)
-          }}
-          unit={unit}
-          zoneNote={zone.note}
-        />
       </div>
 
       <aside className="rail grid">

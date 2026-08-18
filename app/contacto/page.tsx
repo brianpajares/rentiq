@@ -6,7 +6,7 @@ import { planById, salesContactUrl, salesEmail } from "@/lib/commerce";
 
 export const metadata: Metadata = {
   title: "Contacto | RentIQ",
-  description: "Contacta a RentIQ para comprar reportes, activar Pro o solicitar una demo para agentes."
+  description: "Contacta a RentIQ para comprar reportes, activar Pro o solicitar una evaluacion para agentes."
 };
 
 export default function ContactPage({

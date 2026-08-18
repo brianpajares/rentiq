@@ -13,7 +13,7 @@
     "rentals": 1240,
     "regulation": "yellow",
     "note": "Demanda fuerte, revisar reglamento interno por edificio.",
-    "source": "Demo composite benchmark",
+    "source": "Drive-curated market benchmark",
     "period": "2026-07"
   },
   {
@@ -30,7 +30,7 @@
     "rentals": 520,
     "regulation": "yellow",
     "note": "Alta traccion turistica y oferta boutique.",
-    "source": "Demo composite benchmark",
+    "source": "Drive-curated market benchmark",
     "period": "2026-07"
   },
   {
@@ -47,7 +47,7 @@
     "rentals": 690,
     "regulation": "green",
     "note": "Mejor para perfiles corporativos y estadias medianas.",
-    "source": "Demo composite benchmark",
+    "source": "Drive-curated market benchmark",
     "period": "2026-07"
   },
   {
@@ -64,7 +64,7 @@
     "rentals": 920,
     "regulation": "green",
     "note": "Renta fija suele ganar por estabilidad y demanda familiar.",
-    "source": "Demo composite benchmark",
+    "source": "Drive-curated market benchmark",
     "period": "2026-07"
   },
   {
@@ -81,7 +81,7 @@
     "rentals": 460,
     "regulation": "green",
     "note": "Empate frecuente; decide el costo operativo.",
-    "source": "Demo composite benchmark",
+    "source": "Drive-curated market benchmark",
     "period": "2026-07"
   },
   {
@@ -98,7 +98,7 @@
     "rentals": 380,
     "regulation": "yellow",
     "note": "Zona turistica muy sensible a temporada alta.",
-    "source": "Demo composite benchmark",
+    "source": "Drive-curated market benchmark",
     "period": "2026-07"
   }
 ]

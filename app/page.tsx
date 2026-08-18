@@ -8,7 +8,7 @@ import type { LucideIcon } from "lucide-react";
 const featureCards: Array<[string, string, LucideIcon]> = [
   ["Comparacion neta", "Costos completos para fijo y Airbnb, no solo ingresos brutos.", Building2],
   ["Mapa de ventaja", "Distritos y zonas donde gana cada modo con una escala divergente.", Map],
-  ["Reporte premium", "PDF, narrativa IA y recomendaciones listas para compartir.", FileText],
+  ["Reporte premium", "PDF, resumen ejecutivo y recomendaciones listas para compartir.", FileText],
   ["Regulacion", "Semaforo distrital y checklist de edificio antes de operar temporal.", ShieldCheck]
 ];
 

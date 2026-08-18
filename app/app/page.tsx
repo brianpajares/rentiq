@@ -27,7 +27,7 @@ export default function AppHome() {
         </div>
         <div className="grid two">
           {runs.map(({ zone, result }) => (
-            <Link className="card" href={`/app/unidad/demo?district=${zone.district}`} key={zone.id}>
+            <Link className="card" href={`/app/unidad/resultado?district=${zone.district}`} key={zone.id}>
               <span className={`badge ${result.winner === "fixed" ? "fixed" : result.winner === "airbnb" ? "airbnb" : "neutral"}`}>
                 {result.winner === "tie" ? "Empate tecnico" : result.winner === "airbnb" ? "Gana Airbnb" : "Gana fijo"}
               </span>

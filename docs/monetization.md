@@ -6,7 +6,7 @@ RentIQ debe monetizar primero con un reporte por unidad. Es el producto mas faci
 
 ## Planes
 
-- Free: comparador demo y mapa para generar confianza.
+- Free: comparador inicial y mapa por distrito para generar confianza.
 - Reporte: S/ 79 por unidad, con analisis ejecutivo, riesgos, sensibilidad y checklist.
 - Pro: S/ 129 mensual para inversionistas que comparan varias unidades.
 - Agentes: desde S/ 349 mensual para brokers que usan RentIQ como herramienta de captacion.
@@ -39,8 +39,8 @@ Si esas variables estan vacias, los botones pagados llevan a `/contacto`. Esto p
 - Agregar autenticacion y portafolio para Pro.
 - Agregar generacion real de PDF premium.
 - Conectar leads a CRM, Google Sheets, HubSpot o Airtable.
-- Automatizar actualizacion mensual de datasets.
+- Automatizar actualizacion mensual de datasets desde Drive hacia GitHub.
 
 ## Principio De Margen
 
-No activar analisis por API hasta que exista paywall, limites de uso y control de costos. La version actual mantiene el costo bajo usando export manual hacia ChatGPT Plus/Pro.
+No activar analisis costoso hasta que exista paywall, limites de uso y control de margen. La version actual prioriza datasets curados, reporte pagado y cierre comercial simple.

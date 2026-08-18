@@ -1,6 +1,6 @@
 # RentIQ
 
-RentIQ compara dos escenarios de explotacion para un departamento: renta fija versus Airbnb. El MVP esta construido con Next.js 14, React, TypeScript y Recharts, usando datasets versionados de Lima y Cusco para validar la experiencia antes de conectar fuentes reales.
+RentIQ compara dos escenarios de explotacion para un departamento: renta fija versus Airbnb. La app esta construida con Next.js 14, React, TypeScript y Recharts, usando datasets curados de Lima y Cusco administrados en Google Drive y versionados en GitHub para produccion.
 
 ## Funcionalidades incluidas
 
@@ -14,7 +14,6 @@ RentIQ compara dos escenarios de explotacion para un departamento: renta fija ve
 - Mapa exploratorio de ventaja Airbnb por zona.
 - Paginas publicas de precios y metodologia.
 - Tests basicos de formulas.
-- ChatGPT Export / Fetch inverso sin usar API de IA.
 - Datasets operativos en `datasets/` con copias editables en Google Drive.
 - Capa comercial con planes Free, Reporte, Pro y Agentes.
 - CTAs de monetizacion listos para Stripe Payment Links o contacto comercial.
@@ -55,9 +54,9 @@ docs/datasets.md
 ## Rutas principales
 
 - `/` landing
-- `/app` historial demo
+- `/app` historial de evaluaciones
 - `/app/nueva` formulario
-- `/app/unidad/demo` resultado comparativo
+- `/app/unidad/resultado` resultado comparativo
 - `/app/mapa` explorador de mercado
 - `/precios` planes
 - `/metodologia` formulas, datasets y disclaimers
@@ -112,39 +111,19 @@ Playbook:
 docs/monetization.md
 ```
 
-## Flujo ChatGPT Export / Fetch Inverso
-
-RentIQ no usa API de IA. La app genera un paquete estructurado de analisis para que el usuario lo lleve manualmente a ChatGPT Plus/Pro.
-
-Modos disponibles:
-
-- **Modo privado:** boton **Copiar prompt para ChatGPT**. Copia Markdown completo al portapapeles. Recomendado para datos sensibles.
-- **Modo rapido:** boton **Copiar link fetch para ChatGPT**. Copia un link `/api/chatgpt-export?p=...` que devuelve Markdown legible. No usa almacenamiento persistente.
-
-Privacidad:
-
-- La direccion exacta no se comparte por defecto.
-- El link codifica datos en la URL; para datos sensibles usar el prompt directo.
-- No configurar claves de API de IA.
-- No instalar SDKs de OpenAI, Anthropic ni similares.
-- No hay costo de tokens API.
-
-## Arquitectura Recomendada Sin Costos API
+## Arquitectura De Datos En Produccion
 
 ```text
 Repo GitHub = fuente oficial del producto
 Google Drive = fuente editable de datasets mensuales
 Vercel = hosting publico de la app
-RentIQ web app = calculadora + generador de prompts/link fetch
-ChatGPT Project o Custom GPT = asistente de analisis manual
+RentIQ web app = calculadora, reporte y flujo comercial
 ```
 
 Documentos clave:
 
-- `docs/analysis-kit.md`
-- `docs/chatgpt-assistant.md`
-- `docs/no-api-setup-guide.md`
 - `docs/datasets.md`
+- `docs/monetization.md`
 
 ## Modelo de calculo
 

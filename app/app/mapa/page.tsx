@@ -42,7 +42,7 @@ export default function MarketMapPage() {
                   <span>Dataset</span>
                   <strong>{zone.period}</strong>
                 </div>
-                <Link className="button secondary" href={`/app/unidad/demo?district=${zone.district}`}>
+                <Link className="button secondary" href={`/app/unidad/resultado?district=${zone.district}`}>
                   Evaluar aqui <ArrowRight size={16} />
                 </Link>
               </article>

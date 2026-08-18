@@ -1,7 +1,7 @@
 {
   "id": "rentiq-operating-assumptions-2026-07",
   "period": "2026-07",
-  "calculationModelVersion": "mvp-demo",
+  "calculationModelVersion": "drive-curated-v1",
   "defaults": {
     "fixedManagementPct": 0,
     "airbnbManagementPct": 0.22,

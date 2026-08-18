@@ -6,7 +6,7 @@ Carpeta Drive creada para operacion:
 RentIQ Datasets
 ```
 
-Uso: mantener copias editables de los datasets que alimentan RentIQ. Para produccion, la app lee los archivos versionados en `datasets/` dentro del repositorio. El flujo recomendado es actualizar Drive, validar cambios, copiar al repo y desplegar.
+Uso: mantener copias editables de alta calidad de los datasets que alimentan RentIQ. Para produccion, la app lee los archivos versionados en `datasets/` dentro del repositorio. El flujo recomendado es actualizar Drive, validar cambios, copiar al repo y desplegar.
 
 ## Cadencia
 
@@ -27,7 +27,7 @@ datasets/zone-market.json
 datasets/zone-market.csv
 ```
 
-Alimenta: `/app`, `/app/mapa`, `/app/nueva`, `/app/unidad/demo` y `lib/market-data.ts`.
+Alimenta: `/app`, `/app/mapa`, `/app/nueva`, `/app/unidad/resultado` y `lib/market-data.ts`.
 
 Uso: define los benchmarks por zona para ADR, ocupacion, renta fija por m2 y ventaja Airbnb.
 
@@ -80,4 +80,4 @@ Uso: resumen cualitativo por distrito. No reemplaza revision legal, municipal ni
 
 ## Nota de produccion
 
-En este MVP, Drive funciona como fuente editable de operacion y el repo como fuente versionada de produccion. Esta decision evita exponer permisos privados de Drive en la app publica y mantiene el deploy de Vercel simple, auditable y sin variables de entorno obligatorias.
+Drive funciona como fuente editable de operacion y el repo como fuente versionada de produccion. Esta decision evita exponer permisos privados de Drive en la app publica y mantiene el deploy de Vercel simple, auditable y sin variables de entorno obligatorias.

@@ -14,13 +14,13 @@ export default function PrivacyPage() {
         <span className="eyebrow">Privacidad</span>
         <h1 className="section-title">Politica de privacidad</h1>
         <p>
-          RentIQ minimiza datos personales. La version actual calcula escenarios en la experiencia web y evita enviar
-          informacion sensible a servicios de IA.
+          RentIQ minimiza datos personales. La version actual calcula escenarios en la experiencia web usando datasets
+          curados y parametros ingresados por el usuario.
         </p>
         <h2>Datos de evaluacion</h2>
         <p>
-          Los parametros ingresados se usan para construir una comparacion inmobiliaria. El modo de exportacion a
-          ChatGPT genera un prompt o link que el usuario decide copiar y compartir manualmente.
+          Los parametros ingresados se usan para construir una comparacion inmobiliaria. No se deben incluir nombres,
+          telefonos, correos ni informacion personal innecesaria en una evaluacion.
         </p>
         <h2>Google Drive y datasets</h2>
         <p>
