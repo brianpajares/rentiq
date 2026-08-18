@@ -1,4 +1,5 @@
 import { Topbar } from "@/components/Topbar";
+import { datasetCatalog } from "@/lib/market-data";
 
 export default function MethodologyPage() {
   return (
@@ -37,6 +38,25 @@ export default function MethodologyPage() {
             </p>
           </article>
         </div>
+
+        <section className="card" style={{ marginTop: 22 }}>
+          <span className="eyebrow">Datasets operativos</span>
+          <h2>Fuente actualizable mensual</h2>
+          <p className="muted">
+            RentIQ usa datasets versionados en el repo para produccion y mantiene copias editables en Google Drive para
+            actualizacion mensual o bajo demanda. Version modelo: {datasetCatalog.calculationModelVersion}. Periodo:{" "}
+            {datasetCatalog.period}.
+          </p>
+          <div className="grid" style={{ marginTop: 16 }}>
+            {datasetCatalog.datasets.map((dataset) => (
+              <article className="card" key={dataset.id}>
+                <h3>{dataset.id}</h3>
+                <p className="muted">{dataset.description}</p>
+                <code>{dataset.file}</code>
+              </article>
+            ))}
+          </div>
+        </section>
       </section>
     </main>
   );
