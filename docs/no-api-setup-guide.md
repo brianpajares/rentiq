@@ -1,13 +1,14 @@
 # RentIQ No-API Setup Guide
 
-Esta guia explica como usar RentIQ con ChatGPT Plus/Pro sin API de IA, sin claves de proveedor y sin costos adicionales por tokens API.
+Esta guia explica como usar RentIQ con ChatGPT Plus/Pro sin API, sin `OPENAI_API_KEY` y sin costos adicionales por tokens.
 
 ## Arquitectura Final Recomendada
 
 ```text
 GitHub repo = fuente oficial del producto
+Google Drive = fuente editable de datasets mensuales
 Vercel = hosting publico de la app
-RentIQ app = calculadora + generador de prompt
+RentIQ app = calculadora + generador de prompt/link fetch
 Analysis Kit = marco de pensamiento
 ChatGPT Project = asistente de analisis usando tu cuenta Plus/Pro
 Custom GPT = opcional, cuando quieras empaquetarlo mejor
@@ -59,19 +60,19 @@ Uso:
 - Define tono, formato de respuesta y reglas.
 - Evita que el asistente sugiera API salvo que lo pidas expresamente.
 
-### 4. PRD Original
+### 4. Dataset Guide
 
-Archivo original:
+Archivo:
 
 ```text
-PRD_03_RentIQ_Airbnb_Fixed_Rental_Comparator.md
+docs/datasets.md
 ```
 
 Uso:
 
-- Documento maestro del producto.
-- Puedes subirlo al Project de ChatGPT como contexto adicional.
-- No es obligatorio para el dia a dia, pero sirve para decisiones de producto.
+- Explica que hace cada dataset.
+- Define cadencia mensual o bajo demanda.
+- Documenta como Drive alimenta el repo y como el repo alimenta Vercel.
 
 ### 5. Prompt Generado Por La App
 
@@ -86,6 +87,22 @@ Uso:
 - Es el documento dinamico de cada evaluacion.
 - Contiene numeros, supuestos y resultado.
 - Lo pegas en ChatGPT para obtener el analisis.
+
+### 6. Link Fetch Para ChatGPT
+
+Origen:
+
+```text
+Boton "Copiar link fetch para ChatGPT" dentro de RentIQ
+```
+
+Uso:
+
+- Genera un link interno `/api/chatgpt-export?p=...`.
+- La ruta devuelve `text/markdown`.
+- No guarda datos en servidor.
+- No llama APIs externas.
+- Recomendacion: usarlo solo cuando no haya informacion sensible, porque el payload viaja codificado en la URL.
 
 ## Paso A Paso Para Configurar ChatGPT Sin API
 
@@ -104,11 +121,35 @@ README.md
 docs/analysis-kit.md
 docs/chatgpt-assistant.md
 docs/no-api-setup-guide.md
+docs/datasets.md
+datasets/
 ```
 
 Cada cambio importante del producto debe ir al repo.
 
-### Paso 2: Publicar La App En Vercel
+### Paso 2: Mantener Google Drive Como Fuente Editable
+
+Carpeta:
+
+```text
+RentIQ Datasets
+```
+
+Contiene:
+
+```text
+zone-market.json
+zone-market.csv
+seasonality.json
+seasonality.csv
+operating-assumptions.json
+regulatory-risk.json
+README-datasets.md
+```
+
+Actualiza estos archivos mensual o bajo demanda. Despues copia la version validada al repo en `datasets/` y despliega desde GitHub.
+
+### Paso 3: Publicar La App En Vercel
 
 1. Entra a:
 
@@ -132,11 +173,18 @@ Output Directory: default / vacio
 Root Directory: default / vacio
 ```
 
-4. No agregues variables de entorno de proveedores de IA. No hacen falta porque no usaremos API.
+4. No agregues estas variables:
+
+```text
+OPENAI_API_KEY
+OPENAI_MODEL
+```
+
+No hacen falta porque no usaremos API.
 
 5. Haz deploy.
 
-### Paso 3: Crear Un Project En ChatGPT
+### Paso 4: Crear Un Project En ChatGPT
 
 En ChatGPT:
 
@@ -154,15 +202,10 @@ README.md
 docs/analysis-kit.md
 docs/chatgpt-assistant.md
 docs/no-api-setup-guide.md
+docs/datasets.md
 ```
 
-4. Opcionalmente sube:
-
-```text
-PRD_03_RentIQ_Airbnb_Fixed_Rental_Comparator.md
-```
-
-### Paso 4: Pegar Instrucciones En El Project
+### Paso 5: Pegar Instrucciones En El Project
 
 Copia las instrucciones desde:
 
@@ -178,57 +221,28 @@ Instrucciones Para El Project O Custom GPT
 
 en las instrucciones del Project.
 
-### Paso 5: Usar RentIQ En El Dia A Dia
+### Paso 6: Usar RentIQ En El Dia A Dia
 
 1. Abre la app RentIQ publicada.
 2. Crea una evaluacion.
 3. Revisa el resultado.
-4. Haz clic en:
-
-```text
-Copiar prompt para ChatGPT
-```
-
-5. Abre el Project:
-
-```text
-RentIQ Analyst
-```
-
-6. Pega el prompt.
-7. Pide el formato que necesites:
-
-```text
-Analiza esta evaluacion para un propietario.
-```
-
-```text
-Convierte esto en un resumen para inversionista.
-```
-
-```text
-Redacta un reporte premium para PDF.
-```
-
-## Custom GPT Opcional
-
-Crea un Custom GPT solo cuando quieras:
-
-- Compartirlo con tu equipo.
-- Tener starters predefinidos.
-- Empaquetar el asistente como producto interno.
-- Mantener instrucciones fijas mas pulidas.
-
-Para el MVP, el Project es suficiente.
+4. Haz clic en **Copiar prompt para ChatGPT** si hay data sensible.
+5. O haz clic en **Copiar link fetch para ChatGPT** si quieres que ChatGPT lea el Markdown desde la app.
+6. Abre el Project `RentIQ Analyst`.
+7. Pega el prompt o link.
+8. Pide el formato que necesites.
 
 ## Reglas Para Evitar Cobros Extra
 
 No hacer:
 
-- No crear claves de API de IA en Vercel.
-- No agregar endpoints que llamen a proveedores de IA.
-- No instalar SDKs de OpenAI, Anthropic ni similares para produccion.
-- No automatizar analisis dentro de la web todavia.
+```text
+No crear OPENAI_API_KEY en Vercel
+No agregar endpoints /api/openai o /api/analizar
+No instalar SDK de OpenAI para produccion
+No automatizar analisis dentro de la web todavia
+No guardar payloads de ChatGPT Export en base de datos
+```
 
 Si algun dia se activa API, hacerlo solo con:
 
@@ -244,14 +258,15 @@ Antes de lanzar:
 
 ```text
 [ ] App publicada en Vercel
-[ ] No hay claves de API de IA en Vercel
+[ ] No hay OPENAI_API_KEY en Vercel
 [ ] Boton "Copiar prompt para ChatGPT" funciona
 [ ] Boton "Copiar link fetch para ChatGPT" funciona
+[ ] Carpeta "RentIQ Datasets" creada en Google Drive
+[ ] docs/datasets.md subido a Drive
 [ ] Project "RentIQ Analyst" creado
 [ ] README.md subido al Project
 [ ] docs/analysis-kit.md subido al Project
 [ ] docs/chatgpt-assistant.md subido al Project
 [ ] docs/no-api-setup-guide.md subido al Project
-[ ] PRD subido como contexto opcional
 [ ] Primer prompt de prueba analizado en ChatGPT
 ```
