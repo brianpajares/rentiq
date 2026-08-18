@@ -1,0 +1,7 @@
+id,district,city,lat,lng,adr,occupancy,fixedRentM2,airbnbAdvantage,listings,rentals,regulation,note,source,period
+lim-mir-01,Miraflores,Lima,-12.121,-77.03,235,0.64,43,0.28,860,1240,yellow,"Demanda fuerte, revisar reglamento interno por edificio.",Demo composite benchmark,2026-07
+lim-bar-01,Barranco,Lima,-12.149,-77.021,255,0.68,40,0.42,410,520,yellow,"Alta traccion turistica y oferta boutique.",Demo composite benchmark,2026-07
+lim-sis-01,San Isidro,Lima,-12.097,-77.036,245,0.58,46,0.08,340,690,green,"Mejor para perfiles corporativos y estadias medianas.",Demo composite benchmark,2026-07
+lim-sur-01,Surco,Lima,-12.128,-76.991,185,0.49,37,-0.16,230,920,green,"Renta fija suele ganar por estabilidad y demanda familiar.",Demo composite benchmark,2026-07
+lim-mag-01,Magdalena,Lima,-12.091,-77.068,190,0.55,36,0.06,180,460,green,"Empate frecuente; decide el costo operativo.",Demo composite benchmark,2026-07
+cus-cen-01,Centro Historico,Cusco,-13.516,-71.978,220,0.7,31,0.55,1120,380,yellow,"Zona turistica muy sensible a temporada alta.",Demo composite benchmark,2026-07
