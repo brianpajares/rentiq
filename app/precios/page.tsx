@@ -84,9 +84,14 @@ export default function PricingPage() {
               Eso valida precio, objeciones y formato de reporte.
             </p>
           </div>
-          <Link className="button primary" href={salesContactUrl}>
-            Contactar ventas <ArrowRight size={16} />
-          </Link>
+          <div className="chatgpt-export__actions">
+            <Link className="button primary" href={salesContactUrl}>
+              Contactar ventas <ArrowRight size={16} />
+            </Link>
+            <Link className="button secondary" href="/premium">
+              Ver servicio premium
+            </Link>
+          </div>
         </section>
 
         <section className="faq-grid">

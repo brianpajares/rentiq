@@ -14,6 +14,7 @@ export function Topbar() {
         <Link href="/app/nueva">Nueva evaluacion</Link>
         <Link href="/app/mapa">Mapa</Link>
         <Link href="/precios">Precios</Link>
+        <Link href="/premium">Premium</Link>
         <Link href="/metodologia">Metodologia</Link>
         <Link className="button primary" href="/app/nueva">
           Comparar

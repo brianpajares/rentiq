@@ -59,6 +59,7 @@ docs/datasets.md
 - `/app/unidad/resultado` resultado comparativo
 - `/app/mapa` explorador de mercado
 - `/precios` planes
+- `/premium` servicio premium y conversion
 - `/metodologia` formulas, datasets y disclaimers
 
 ## Ejecutar localmente
@@ -124,6 +125,16 @@ Documentos clave:
 
 - `docs/datasets.md`
 - `docs/monetization.md`
+
+## Monetizacion Recomendada
+
+El comparador gratuito funciona como captador de leads. Despues del resultado, el usuario puede:
+
+1. Copiar el paquete para analizarlo en ChatGPT con su cuenta.
+2. Revisar el veredicto base de RentIQ.
+3. Ir a `/premium` para solicitar un reporte, llamada de decision o plan para agentes.
+
+La monetizacion inicial no depende de tokens ni API. Cobra por revision, criterio experto, PDF y acompanamiento.
 
 ## Modelo de calculo
 
